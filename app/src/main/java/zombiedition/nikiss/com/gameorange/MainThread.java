@@ -8,6 +8,7 @@ import android.view.SurfaceHolder;
  */
 
 public class MainThread extends Thread {
+
     public static final int MAX_FPS = 30;
     private double averageFPS;
     private SurfaceHolder surfaceHolder;
@@ -27,6 +28,7 @@ public class MainThread extends Thread {
 
     @Override
     public void run(){
+
         long startime;
         long timeMillis= 1000/MAX_FPS;
         long waitTime;
@@ -63,15 +65,19 @@ public class MainThread extends Thread {
             }catch (Exception e) {
                 e.printStackTrace();
             }
+            // ici on a le temps ecouler pour chaque jeux
             totalTime+=System.nanoTime()-startime;
             frameCount++;
             if (frameCount== MAX_FPS) {
                 averageFPS = 1000/((totalTime/frameCount)/1000000);
                 frameCount = 0;
                 totalTime =0;
-                System.out.println(averageFPS);
+               // System.out.println(averageFPS);
             }
         }
 
     }
+
+
+
 }

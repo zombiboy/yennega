@@ -8,6 +8,10 @@ import android.graphics.Rect;
  * Created by issouf on 23/08/18.
  */
 
+/**
+ * Un obstacle est constituee de deux objects rectangle et rectangle2
+ *
+ */
 public class Obstacle implements GameObject{
 
     private Rect rectangle;
@@ -15,6 +19,14 @@ public class Obstacle implements GameObject{
     private int color;
 
 
+    /**
+     *
+     * @param rectHeight
+     * @param color
+     * @param startX
+     * @param startY
+     * @param playerGap
+     */
     public Obstacle(int rectHeight,int color ,int startX,int startY,int playerGap){
 
         this.color= color;
@@ -24,6 +36,10 @@ public class Obstacle implements GameObject{
 
     }
 
+    /**
+     * permet de faire descendre l'obstacles
+     * @param y
+     */
     public void incrementY(float y) {
         rectangle.top += y;
         rectangle.bottom += y;
@@ -31,6 +47,12 @@ public class Obstacle implements GameObject{
         rectangle2.bottom += y;
     }
 
+    /**
+     * ici le parametre player  permet de detecter si un Obstacle est en colission avec
+     * le joueur.
+     * @param player
+     * @return
+     */
     public boolean playerCollide(RectPlayer player) {
         return Rect.intersects(rectangle,player.getRectangle()) || Rect.intersects(rectangle2,player.getRectangle());
     }

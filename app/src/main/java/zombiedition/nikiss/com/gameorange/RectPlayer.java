@@ -69,6 +69,12 @@ public class RectPlayer implements GameObject{
 
     }
 
+    /**
+     * point est le coordonné du coin touché , il est utiliser pour redessiner l'objet ,
+     * rectangle est l'objet et sera dessine en fonction de point , il aura pour centre le coin clique
+     * dans le jeux.
+     * @param point
+     */
     public void update(Point point) {
         //l,t,r,b
         float oldLeft = rectangle.left;

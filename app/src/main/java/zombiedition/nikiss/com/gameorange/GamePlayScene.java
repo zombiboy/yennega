@@ -1,11 +1,17 @@
 package zombiedition.nikiss.com.gameorange;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.IBinder;
 import android.view.MotionEvent;
+import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
 
 /**
  *
@@ -17,6 +23,8 @@ import android.view.MotionEvent;
 
 
 public class GamePlayScene implements Scene {
+
+
 
     private RectPlayer player;
     private Point playerPoint;
@@ -54,6 +62,8 @@ public class GamePlayScene implements Scene {
         player.update(playerPoint);
         obstacleManager = new ObstacleManager(400,650,75,Color.BLACK);
         movingPlayer = false;
+        gameOnsound.start();
+
 
     }
 
@@ -100,6 +110,7 @@ public class GamePlayScene implements Scene {
             paint.setTextSize(100);
             paint.setColor(Color.MAGENTA);
             drawCenterText(canvas,paint,"Fin de Partie");
+
         }
     }
 
@@ -154,6 +165,9 @@ public class GamePlayScene implements Scene {
         float y = cHeight / 2f + r.height() / 2f - r.bottom;
         canvas.drawText(text, x, y, paint);
     }
+
+
+
 
 
 }

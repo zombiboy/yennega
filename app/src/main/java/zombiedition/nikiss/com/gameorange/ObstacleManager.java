@@ -6,6 +6,8 @@ import android.graphics.Paint;
 
 import java.util.ArrayList;
 
+import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
+
 /**
  * Created by issouf on 23/08/18.
  */
@@ -43,8 +45,9 @@ public class ObstacleManager {
      */
     public boolean playerCollide(RectPlayer player) {
         for (Obstacle ob: obstacles ) {
-            if (ob.playerCollide(player))
-            return true;
+            if (ob.playerCollide(player)){
+                gameOnsound.pause();
+            return true;}
         }
         return false;
     }

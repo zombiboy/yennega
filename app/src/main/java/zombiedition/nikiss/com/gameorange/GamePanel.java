@@ -17,7 +17,7 @@ import android.view.SurfaceView;
 
 class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
 
-    public MainThread thread;
+    public static MainThread thread;
     private SceneManager manager;
 
     public GamePanel(Context context) {
@@ -27,6 +27,7 @@ class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         Constants.CURRENT_CONTEXT= context;
 
         thread = new MainThread(getHolder(),this);
+
 
         manager = new SceneManager();
 
@@ -65,7 +66,7 @@ class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public boolean onTouchEvent(MotionEvent event)  {
 
-        manager.recieveTouch(event );
+        manager.recieveTouch(event);
         return true;
         // return super.onTouchEvent(event);
     }
@@ -87,6 +88,30 @@ class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         manager.draw(canvas);
 
     }
+
+
+
+    public void pause()  {
+        thread.setRunning(false);
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    public void playGame() {
+        System.out.println("dans la metjode play");
+        thread.setRunning(true);
+        //relanceThread();
+
+
+    }
+
+
 
 
 }
