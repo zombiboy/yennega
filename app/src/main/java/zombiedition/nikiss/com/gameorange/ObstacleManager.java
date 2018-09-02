@@ -24,6 +24,8 @@ public class ObstacleManager {
     private long startTime;
     private long initTime;
 
+
+
     public ObstacleManager(int playerGap, int obstacleGap, int obstacleHeight, int color) {
         this.playerGap = playerGap;
         this.obstacleGap = obstacleGap;
@@ -34,6 +36,7 @@ public class ObstacleManager {
 
         obstacles = new ArrayList<>();
 
+        // si pause est faux alors on populate le jeux
         populateObstacles();
     }
 

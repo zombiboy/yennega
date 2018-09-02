@@ -9,6 +9,8 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
 //import android.support.annotation.MainThread;
 
 /**
@@ -92,21 +94,28 @@ class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
 
 
     public void pause()  {
-        thread.setRunning(false);
+
         try {
+            thread.setRunning(false);
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        gameOnsound.pause();
 
     }
 
 
 
     public void playGame() {
-        System.out.println("dans la metjode play");
-        thread.setRunning(true);
+        gameOnsound.start();
+        System.out.println("dans la Methode Play");
+
         //relanceThread();
+
+        thread = new MainThread(getHolder(),this);
+        thread.setRunning(true);
+        thread.start();
 
 
     }

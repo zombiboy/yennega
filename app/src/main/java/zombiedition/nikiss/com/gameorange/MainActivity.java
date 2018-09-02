@@ -37,7 +37,6 @@ public class MainActivity extends Activity {
          * partie musique
          */
 
-        //playMusik();
 
         //initializing the media players for the game sounds
         gameOnsound = MediaPlayer.create(this,R.raw.audio);
@@ -47,50 +46,7 @@ public class MainActivity extends Activity {
         setContentView(gamePanel);
     }
 
-    private void playMusik() {
 
-        MusicService mServ = new MusicService();
-        Intent music = new Intent();
-        music.setClass(this,MusicService.class);
-        startService(music);
-    }
-
-
-    /**
-     * Partie pour gerer la musique
-     * mServ.pauseMusic();
-     mServ.resumeMusic();
-     mServ.stopMusic();
-     */
-    private boolean mIsBound = false;
-    public MusicService mServ;
-    private ServiceConnection Scon =new ServiceConnection(){
-
-        public void onServiceConnected(ComponentName name, IBinder
-                binder) {
-            mServ = ((MusicService.ServiceBinder)binder).getService();
-
-        }
-
-        public void onServiceDisconnected(ComponentName name) {
-            mServ = null;
-        }
-    };
-
-    void doBindService(){
-        bindService(new Intent(this,MusicService.class),
-                Scon,Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
-
-    void doUnbindService()
-    {
-        if(mIsBound)
-        {
-            unbindService(Scon);
-            mIsBound = false;
-        }
-    }
 
 
     @Override
@@ -117,7 +73,7 @@ public class MainActivity extends Activity {
 
                         dialog.cancel();
                         System.out.println("apres  le dialog cancel");
-                        //gamePanel.playGame();
+                        gamePanel.playGame();
 
                     }
                 });

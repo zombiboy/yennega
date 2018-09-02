@@ -11,6 +11,8 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.IBinder;
 import android.view.MotionEvent;
+import android.widget.Toast;
+
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
 
 /**
@@ -25,7 +27,19 @@ import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
 public class GamePlayScene implements Scene {
 
 
+    //==============
 
+    //variable for counting two successive up-down events
+    int clickCount = 0;
+    //variable for storing the time of first click
+    long startTime;
+    //variable for calculating the total time
+    long duration;
+    //constant for defining the time duration between the click that can be considered as double-tap
+    static final int MAX_DURATION = 500;
+    //================
+
+    long startTimeDoubleClik;
     private RectPlayer player;
     private Point playerPoint;
 
@@ -58,6 +72,7 @@ public class GamePlayScene implements Scene {
 
 
     public void reset() {
+
         playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
         obstacleManager = new ObstacleManager(400,650,75,Color.BLACK);
@@ -66,6 +81,7 @@ public class GamePlayScene implements Scene {
 
 
     }
+
 
     @Override
     public void terminate() {
@@ -77,6 +93,12 @@ public class GamePlayScene implements Scene {
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+
+                //**** Double clik
+                startTime = System.currentTimeMillis();
+                clickCount++;
+                //***
+
                 if(!gameOver && player.getRectangle().contains((int)event.getX(),(int)event.getY()))
                     movingPlayer = true;
                 if(gameOver && System.currentTimeMillis() - gameOverTime >= 2000){
@@ -92,6 +114,23 @@ public class GamePlayScene implements Scene {
                 break;
             case MotionEvent.ACTION_UP:
                 movingPlayer = false;
+
+                //**** Pour les double clik de pause
+                long time = System.currentTimeMillis() - startTime;
+                duration=  duration + time;
+                if(clickCount == 2)
+                {
+                    if(duration<= MAX_DURATION)
+                    {
+                        System.out.println("DOUBLE TAP");
+
+                    }
+                    clickCount = 0;
+                    duration = 0;
+                    break;
+                }
+                //*********
+
                 break;
         }
     }
