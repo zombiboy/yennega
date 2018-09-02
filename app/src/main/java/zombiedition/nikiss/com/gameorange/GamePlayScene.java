@@ -1,18 +1,16 @@
 package zombiedition.nikiss.com.gameorange;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.os.IBinder;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
+import java.util.HashMap;
+
+import static zombiedition.nikiss.com.gameorange.Constants.TYPE_PLAYER_ALIEN;
+import static zombiedition.nikiss.com.gameorange.Constants.TYPE_PLAYER_ALIEN_YELLOW;
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
 
 /**
@@ -39,6 +37,7 @@ public class GamePlayScene implements Scene {
     static final int MAX_DURATION = 500;
     //================
 
+
     long startTimeDoubleClik;
     private RectPlayer player;
     private Point playerPoint;
@@ -53,13 +52,19 @@ public class GamePlayScene implements Scene {
 
     private Rect r = new Rect();
 
+    /**
+     *  DEFISSONS ICI La taille du Joeur  et  ou Son TYPE
+     *  player = new RectPlayer(new Rect(100,100,200,200));
+     *  RectPlayer(new Rect(100,100,200,200),TYPE_PLAYER_ALIEN_YELLOW);
+     */
     public GamePlayScene(){
 
         /**
          * definission de la taille du joueur
          */
 
-        player = new RectPlayer(new Rect(100,100,200,200), Color.rgb(255,0,0));
+
+        player = new RectPlayer(new Rect(100,100,200,200),TYPE_PLAYER_ALIEN_YELLOW);
         playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
 

@@ -8,6 +8,11 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static zombiedition.nikiss.com.gameorange.Constants.TYPE_PLAYER_ALIEN;
+
 /**
  * Created by Issouf on 22/08/2018.
  */
@@ -15,22 +20,27 @@ import android.graphics.Rect;
 public class RectPlayer implements GameObject{
 
     private Rect rectangle;
-    private int color;
+    private int playerType;
 
     private  Animation idle;
     private  Animation walkRight;
     private  Animation walkLeft;
     private  AnimationManager animManager;
 
+    private ModelPlayerManager modelPlayerManager = new ModelPlayerManager();
+
+
+
     /**
      * ici on choisira l'image de notre jeux
      * @param rectangle
-     * @param color
+     *
      */
-    public RectPlayer(Rect rectangle,int color){
+    public RectPlayer(Rect rectangle){
 
         this.rectangle = rectangle;
-        this.color= color;
+
+
 
         BitmapFactory bf = new BitmapFactory();
         Bitmap idleImg = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.alienblue);
@@ -49,6 +59,43 @@ public class RectPlayer implements GameObject{
         walkLeft = new Animation(new Bitmap[] {walk1,walk2},0.5f);
 
         animManager = new AnimationManager(new Animation[]{idle,walkRight,walkLeft});
+
+    }
+
+
+
+    /**
+     *
+     * @param rectangle
+     * @param playerType donner la cle de ceux que On veux avoir comme joeur
+     */
+    public RectPlayer(Rect rectangle, int playerType) {
+        this.rectangle = rectangle;
+        this.playerType = playerType;
+
+
+        int intIdle =modelPlayerManager.getPlayerHashMap().get(playerType).getIdleImg();
+        int intWalk1=modelPlayerManager.getPlayerHashMap().get(playerType).getWalk1();
+        int intWalk2=modelPlayerManager.getPlayerHashMap().get(playerType).getWalk2();
+
+        BitmapFactory bf = new BitmapFactory();
+        Bitmap idleImg = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),intIdle);
+        Bitmap walk1= bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),intWalk1);
+        Bitmap walk2= bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),intWalk2);
+
+        idle = new Animation(new Bitmap[] {idleImg},2);
+        walkRight = new Animation(new Bitmap[] {walk1,walk2},0.5f);
+
+        Matrix m = new Matrix();
+        m.preScale(1,1);
+
+        walk1 = Bitmap.createBitmap(walk1,0,0,walk1.getWidth(),walk1.getHeight(),m,false);
+        walk2 = Bitmap.createBitmap(walk2,0,0,walk2.getWidth(),walk2.getHeight(),m,false);
+
+        walkLeft = new Animation(new Bitmap[] {walk1,walk2},0.5f);
+
+        animManager = new AnimationManager(new Animation[]{idle,walkRight,walkLeft});
+
 
     }
 
