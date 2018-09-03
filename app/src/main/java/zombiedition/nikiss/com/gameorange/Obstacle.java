@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import zombiedition.nikiss.com.gameorange.utils.Constants;
+
 /**
  * Created by issouf on 23/08/18.
  */
@@ -32,7 +34,7 @@ public class Obstacle implements GameObject{
         this.color= color;
         //l,t,r,b
         rectangle = new Rect(0,startY,startX,startY+rectHeight);
-        rectangle2 = new Rect(startX+playerGap,startY,Constants.SCREEN_WIDTH,startY+rectHeight);
+        rectangle2 = new Rect(startX+playerGap,startY, Constants.SCREEN_WIDTH,startY+rectHeight);
 
     }
 

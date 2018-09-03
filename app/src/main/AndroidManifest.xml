@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoBar">
         <activity
-            android:name=".AcceuilActivity"
+            android:name=".Activity.AcceuilActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,12 +20,14 @@
         </activity>
 
         <service
-            android:name=".MusicService"
+            android:name=".utils.MusicService"
             android:enabled="true" />
 
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".HighScore"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activity.HighScore" />
+        <activity android:name=".Activity.Level"></activity>
     </application>
 
 </manifest>

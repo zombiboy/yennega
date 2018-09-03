@@ -1,12 +1,18 @@
 package zombiedition.nikiss.com.gameorange;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
 
+import zombiedition.nikiss.com.gameorange.utils.Constants;
+
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
 
 /**
  * Created by issouf on 23/08/18.
@@ -23,6 +29,8 @@ public class ObstacleManager {
 
     private long startTime;
     private long initTime;
+
+    private SharedPreferences sharedPreferences;
 
 
 
@@ -49,14 +57,32 @@ public class ObstacleManager {
     public boolean playerCollide(RectPlayer player) {
         for (Obstacle ob: obstacles ) {
             if (ob.playerCollide(player)){
+
+                MemoriserScoreJeux();
                 gameOnsound.pause();
-            return true;}
+            return true;
+            }
         }
         return false;
     }
 
+    /**
+     * Cette methode nous permettra de memoriser les meilleurs scores de chaque etapes
+     * a la fi n du jeux, la VARAIBLE MEILLEUR_SCORE nous permettra de sauvegarder les scores
+     */
+    private void MemoriserScoreJeux() {
+
+        //initializing shared Preferences
+        //sharedPreferences = context.getSharedPreferences("SHAR_PREF_NAME", Context.MODE_PRIVATE);
+
+        System.out.println("AN avant "+MEILLEUR_SCORE+"DU LEVEL"+SELECT_LEVEL_GAME);
+
+        MEILLEUR_SCORE+=score;
+        System.out.println("NN avant "+MEILLEUR_SCORE);
+    }
+
     private void populateObstacles() {
-        int currY = -5*Constants.SCREEN_HEIGHT/4;
+        int currY = -5* Constants.SCREEN_HEIGHT/4;
         while(currY < 0) {
             int xStart = (int)(Math.random()*(Constants.SCREEN_WIDTH - playerGap));
             obstacles.add(new Obstacle(obstacleHeight, color, xStart, currY, playerGap));
@@ -87,6 +113,8 @@ public class ObstacleManager {
             obstacles.add(0, new Obstacle(obstacleHeight, color, xStart, obstacles.get(0).getRectangle().top - obstacleHeight - obstacleGap, playerGap));
             obstacles.remove(obstacles.size() - 1);
             score++;
+
+
         }
     }
 

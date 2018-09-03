@@ -7,7 +7,7 @@
     android:gravity="center_horizontal"
     android:paddingTop="150dp"
     android:orientation="vertical"
-    tools:context="zombiedition.nikiss.com.gameorange.HighScore"
+    tools:context="zombiedition.nikiss.com.gameorange.Activity.HighScore"
     android:background="@drawable/splash">
 
     <TextView

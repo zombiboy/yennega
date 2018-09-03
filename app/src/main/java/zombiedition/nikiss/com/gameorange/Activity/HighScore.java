@@ -1,10 +1,12 @@
-package zombiedition.nikiss.com.gameorange;
+package zombiedition.nikiss.com.gameorange.Activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import zombiedition.nikiss.com.gameorange.R;
 
 public class HighScore extends AppCompatActivity {
 

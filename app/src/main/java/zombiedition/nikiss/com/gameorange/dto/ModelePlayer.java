@@ -1,4 +1,4 @@
-package zombiedition.nikiss.com.gameorange;
+package zombiedition.nikiss.com.gameorange.dto;
 
 /**
  * Created by issouf on 02/09/18.

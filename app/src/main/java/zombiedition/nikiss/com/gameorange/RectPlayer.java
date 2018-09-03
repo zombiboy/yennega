@@ -4,14 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static zombiedition.nikiss.com.gameorange.Constants.TYPE_PLAYER_ALIEN;
+import zombiedition.nikiss.com.gameorange.utils.Constants;
 
 /**
  * Created by Issouf on 22/08/2018.

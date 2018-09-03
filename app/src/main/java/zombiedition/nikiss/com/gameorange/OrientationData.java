@@ -1,11 +1,12 @@
 package zombiedition.nikiss.com.gameorange;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+
+import zombiedition.nikiss.com.gameorange.utils.Constants;
 
 /**
  * Created by issouf on 24/08/18.

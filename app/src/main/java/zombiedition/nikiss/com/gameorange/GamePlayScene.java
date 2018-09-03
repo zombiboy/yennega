@@ -1,5 +1,8 @@
 package zombiedition.nikiss.com.gameorange;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -7,11 +10,12 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
-import java.util.HashMap;
+import zombiedition.nikiss.com.gameorange.utils.Constants;
 
-import static zombiedition.nikiss.com.gameorange.Constants.TYPE_PLAYER_ALIEN;
-import static zombiedition.nikiss.com.gameorange.Constants.TYPE_PLAYER_ALIEN_YELLOW;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
+
 
 /**
  *
@@ -22,7 +26,7 @@ import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
  */
 
 
-public class GamePlayScene implements Scene {
+public class GamePlayScene extends Activity implements Scene {
 
 
     //==============
@@ -49,7 +53,6 @@ public class GamePlayScene implements Scene {
     private long gameOverTime;
     private OrientationData orientationData;
     private long frameTime;
-
     private Rect r = new Rect();
 
     /**
@@ -61,10 +64,14 @@ public class GamePlayScene implements Scene {
 
         /**
          * definission de la taille du joueur
+         * TYPE_PLAYER_ALIEN_YELLOW
+         * SELECT_LEVEL_GAME =TYPE_PLAYER_ALIEN  = 0 = position
+         * SELECT_LEVEL_GAME =TYPE_PLAYER_ALIEN_YELLOW;
          */
 
 
-        player = new RectPlayer(new Rect(100,100,200,200),TYPE_PLAYER_ALIEN_YELLOW);
+
+        player = new RectPlayer(new Rect(100,100,200,200),SELECT_LEVEL_GAME);
         playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
 
@@ -194,6 +201,8 @@ public class GamePlayScene implements Scene {
             if (obstacleManager.playerCollide(player)) {
                 gameOver = true;
                 gameOverTime= System.currentTimeMillis();
+                System.out.println("GAMEOVERTIME OUF:"+gameOverTime);
+                //ici qu'on vas essayer de sauvegarder le score
             }
         }
     }
@@ -209,7 +218,6 @@ public class GamePlayScene implements Scene {
         float y = cHeight / 2f + r.height() / 2f - r.bottom;
         canvas.drawText(text, x, y, paint);
     }
-
 
 
 

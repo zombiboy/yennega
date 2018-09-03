@@ -2,24 +2,24 @@ package zombiedition.nikiss.com.gameorange;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.media.MediaPlayer;
-import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
+import zombiedition.nikiss.com.gameorange.Activity.AcceuilActivity;
+import zombiedition.nikiss.com.gameorange.utils.Constants;
+
+
 public class MainActivity extends Activity {
 
 
-    static MediaPlayer gameOnsound;
-    GamePanel gamePanel;
+    public static MediaPlayer gameOnsound;
+    public GamePanel gamePanel;
+
 
 
     @Override
@@ -33,10 +33,10 @@ public class MainActivity extends Activity {
         Constants.SCREEN_WIDTH = dm.widthPixels;
         Constants.SCREEN_HEIGHT = dm.heightPixels;
 
+
         /**
          * partie musique
          */
-
 
         //initializing the media players for the game sounds
         gameOnsound = MediaPlayer.create(this,R.raw.audio);

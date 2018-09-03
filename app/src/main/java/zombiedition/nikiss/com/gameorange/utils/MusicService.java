@@ -1,4 +1,4 @@
-package zombiedition.nikiss.com.gameorange;
+package zombiedition.nikiss.com.gameorange.utils;
 
 /**
  * Created by issouf on 24/08/18.
@@ -11,6 +11,8 @@ import android.media.MediaPlayer.OnErrorListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.widget.Toast;
+
+import zombiedition.nikiss.com.gameorange.R;
 
 public class MusicService extends Service  implements MediaPlayer.OnErrorListener {
 

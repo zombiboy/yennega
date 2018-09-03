@@ -2,8 +2,10 @@ package zombiedition.nikiss.com.gameorange;
 
 import java.util.HashMap;
 
-import static zombiedition.nikiss.com.gameorange.Constants.TYPE_PLAYER_ALIEN;
-import static zombiedition.nikiss.com.gameorange.Constants.TYPE_PLAYER_ALIEN_YELLOW;
+import zombiedition.nikiss.com.gameorange.dto.ModelePlayer;
+
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
 
 /**
  *

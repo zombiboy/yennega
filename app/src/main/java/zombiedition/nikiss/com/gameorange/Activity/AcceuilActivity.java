@@ -1,13 +1,16 @@
-package zombiedition.nikiss.com.gameorange;
+package zombiedition.nikiss.com.gameorange.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+
+import zombiedition.nikiss.com.gameorange.MainActivity;
+import zombiedition.nikiss.com.gameorange.R;
 
 public class AcceuilActivity extends Activity implements View.OnClickListener{
 
@@ -15,6 +18,7 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
     private ImageButton buttonPlay;
     // the high score button
     private ImageButton buttonScore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
 
         //getting the button
         buttonPlay = (ImageButton) findViewById(R.id.buttonPlay);
+
 
         //initializing the highscore button
         buttonScore = (ImageButton) findViewById(R.id.buttonScore);
@@ -44,12 +49,14 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
         if (v == buttonPlay) {
 
             //the transition from MainActivity to GameActivity
-            startActivity(new Intent(AcceuilActivity.this, MainActivity.class));
+            //startActivity(new Intent(AcceuilActivity.this, MainActivity.class));
+            startActivity(new Intent(AcceuilActivity.this, Level.class));
         }
         if (v == buttonScore) {
             //the transition from MainActivity to HighScore activity
             startActivity(new Intent(AcceuilActivity.this, HighScore.class));
         }
+
 
 
     }
