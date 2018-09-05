@@ -22,4 +22,12 @@ public class Constants {
 
     public static int  MEILLEUR_SCORE = 0;
 
+    public static final String SHAR_PREF_NAME = "PREFSORANGE";
+
+    public static final String PREFS_LEVEL="PREFS_LEVEL";
+
+    public static final String PREFS_HIGHSCORE_LEVEL="PREFS_HIGHSCORE_LEVEL";
+
+    private static final String TABLE_MISSIONS = "table_missions";
+
 }

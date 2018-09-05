@@ -5,10 +5,13 @@ package zombiedition.nikiss.com.gameorange.dto;
  */
 
 public class Mission {
+    private int id=0;
     private int typePlayer;
     private String nameMission;
-    private int level;
-    private String description;
+    private int level=0;
+    private String description="";
+    private int meilleurScore=0;
+    private int scorePourDebloqSuivant=0;
 
     public Mission() {
 
@@ -19,6 +22,22 @@ public class Mission {
         this.nameMission = nameMission;
         this.level = level;
         this.description = description;
+    }
+
+    public Mission(int typePlayer, String nameMission, int level, String description, int scorePourDebloqSuivant) {
+        this.typePlayer = typePlayer;
+        this.nameMission = nameMission;
+        this.level = level;
+        this.description = description;
+        this.scorePourDebloqSuivant = scorePourDebloqSuivant;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNameMission() {
@@ -47,6 +66,22 @@ public class Mission {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getMeilleurScore() {
+        return meilleurScore;
+    }
+
+    public void setMeilleurScore(int meilleurScore) {
+        this.meilleurScore = meilleurScore;
+    }
+
+    public int getScorePourDebloqSuivant() {
+        return scorePourDebloqSuivant;
+    }
+
+    public void setScorePourDebloqSuivant(int scorePourDebloqSuivant) {
+        this.scorePourDebloqSuivant = scorePourDebloqSuivant;
     }
 
     public void setDescription(String description) {

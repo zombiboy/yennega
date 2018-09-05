@@ -54,6 +54,7 @@ public class GamePlayScene extends Activity implements Scene {
     private OrientationData orientationData;
     private long frameTime;
     private Rect r = new Rect();
+    private Context context;
 
     /**
      *  DEFISSONS ICI La taille du Joeur  et  ou Son TYPE
@@ -82,14 +83,44 @@ public class GamePlayScene extends Activity implements Scene {
         frameTime= System.currentTimeMillis();
     }
 
+    public GamePlayScene(Context context){
+
+        this.context = context;
+
+        /**
+         * definission de la taille du joueur
+         * TYPE_PLAYER_ALIEN_YELLOW
+         * SELECT_LEVEL_GAME =TYPE_PLAYER_ALIEN  = 0 = position
+         * SELECT_LEVEL_GAME =TYPE_PLAYER_ALIEN_YELLOW;
+         */
+
+
+
+        player = new RectPlayer(new Rect(100,100,200,200),SELECT_LEVEL_GAME);
+        playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
+        player.update(playerPoint);
+
+        obstacleManager = new ObstacleManager(400,650,75,Color.BLACK,context);
+
+        orientationData=new OrientationData();
+        orientationData.register();
+        frameTime= System.currentTimeMillis();
+
+
+    }
+
+
+
 
     public void reset() {
 
         playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
-        obstacleManager = new ObstacleManager(400,650,75,Color.BLACK);
+        obstacleManager = new ObstacleManager(400,650,75,Color.BLACK,context);
         movingPlayer = false;
         gameOnsound.start();
+
+        System.out.println("RESET DAN GAMEPLAY");
 
 
     }

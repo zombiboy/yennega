@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,10 @@ import zombiedition.nikiss.com.gameorange.utils.Constants;
 
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_HIGHSCORE_LEVEL;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_LEVEL;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.SHAR_PREF_NAME;
 
 /**
  * Created by issouf on 23/08/18.
@@ -30,6 +34,8 @@ public class ObstacleManager {
     private long startTime;
     private long initTime;
 
+    private Context context;
+
     private SharedPreferences sharedPreferences;
 
 
@@ -39,6 +45,23 @@ public class ObstacleManager {
         this.obstacleGap = obstacleGap;
         this.obstacleHeight = obstacleHeight;
         this.color = color;
+
+        startTime = initTime = System.currentTimeMillis();
+
+        obstacles = new ArrayList<>();
+
+        // si pause est faux alors on populate le jeux
+        populateObstacles();
+    }
+
+    public ObstacleManager(int playerGap, int obstacleGap, int obstacleHeight, int color,Context context) {
+        this.playerGap = playerGap;
+        this.obstacleGap = obstacleGap;
+        this.obstacleHeight = obstacleHeight;
+        this.color = color;
+        this.context = context;
+
+        sharedPreferences = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE);
 
         startTime = initTime = System.currentTimeMillis();
 
@@ -73,12 +96,45 @@ public class ObstacleManager {
     private void MemoriserScoreJeux() {
 
         //initializing shared Preferences
-        //sharedPreferences = context.getSharedPreferences("SHAR_PREF_NAME", Context.MODE_PRIVATE);
 
         System.out.println("AN avant "+MEILLEUR_SCORE+"DU LEVEL"+SELECT_LEVEL_GAME);
 
         MEILLEUR_SCORE+=score;
         System.out.println("NN avant "+MEILLEUR_SCORE);
+
+        // PREFS_LEVEL+SELECT_LEVEL_GAME donne PREFS_LEVEL0 ,PREFS_LEVEL1
+        //pour cela, on commence par regarder si on a déjà des éléments sauvegardés
+        if (sharedPreferences.contains(PREFS_LEVEL+SELECT_LEVEL_GAME) && sharedPreferences.contains(PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME)) {
+
+            int levelEnCours = sharedPreferences.getInt(PREFS_LEVEL+SELECT_LEVEL_GAME, SELECT_LEVEL_GAME);
+            int lastscoreLevelEnCours = sharedPreferences.getInt(PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME, 0);
+            //String name = sharedPreferences.getString(PREFS_NAME, null);
+            // Si le nouveau score est superieur a l'ancien alors on sauvegarde le nouveau Level
+
+            if(score > lastscoreLevelEnCours ){
+                System.out.println("MISE A JOUR DU SCORE");
+                System.out.println("NOUVEL SCORE  == "+PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME+" "+score);
+                sharedPreferences
+                        .edit()
+                        .putInt(PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME, score)
+                        .apply();
+
+                //TODO:: On pourra comparer le Score et debloquer le nouveau Niveau si possible
+
+            }
+            System.out.println("ANCIEN SCORE  == "+PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME+" "+lastscoreLevelEnCours);
+
+
+        } else {
+            //si aucun utilisateur n'est sauvegardé, on ajouter [24,florent]
+            sharedPreferences
+                    .edit()
+                    .putInt(PREFS_LEVEL+SELECT_LEVEL_GAME, SELECT_LEVEL_GAME)
+                    .putInt(PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME, score)
+                    .apply();
+            System.out.println("SCORE SAUVEGARDER AVEC SUCCES");
+        }
+
     }
 
     private void populateObstacles() {
