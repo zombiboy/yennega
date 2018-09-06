@@ -129,11 +129,13 @@ public class ServiceBDD {
      * cette methode est appele pour initialiser la base de donner , avoir des donnens en
      * base .
      */
-    public void ajouterQuelquesMissions() {
+    public void ajouterDefaultMissions() {
         ArrayList<Mission> missionList = new ArrayList<>();
 
-        missionList.add(new Mission(1,"VELO",3,"La mission est deblok "));
-        missionList.add(new Mission(2,"SUPER",4,"la mission consiste a debloq"));
+        missionList.add(new Mission(1,"ALLIEN",1,"La mission est de d'arrive au bouvevard avec les passagers "));
+        missionList.add(new Mission(2,"ALLIEN 2",2,"la mission consiste a transporte des personnes à l'aeroport"));
+        missionList.add(new Mission(3,"MOTO",3,"la mission velo drome seulement l'aeroport"));
+        missionList.add(new Mission(4,"VOITURE",4,"la mission consiste a transporte des personnes oui à l'aeroport"));
 
         this.addAllMissions(missionList);
 

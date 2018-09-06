@@ -6,6 +6,8 @@ import zombiedition.nikiss.com.gameorange.dto.ModelePlayer;
 
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_MOTO;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_VOITURE;
 
 /**
  *
@@ -23,9 +25,14 @@ public class ModelPlayerManager {
 
         ModelePlayer allien = new ModelePlayer(R.drawable.alienblue,R.drawable.alienblue_walk1,R.drawable.alienblue_walk2);
         ModelePlayer allienYellow = new ModelePlayer(R.drawable.alienyellow,R.drawable.alienyellow_walk1,R.drawable.alienyellow_walk2);
+        ModelePlayer motoPlayer = new ModelePlayer(R.drawable.moto_walk,R.drawable.moto_walk1,R.drawable.moto_walk2);
+        ModelePlayer voiturePlayer = new ModelePlayer(R.drawable.taxi_walk,R.drawable.taxi_walk1,R.drawable.taxi_walk2);
+
 
         playerHashMap.put(TYPE_PLAYER_ALIEN,allien);
         playerHashMap.put(TYPE_PLAYER_ALIEN_YELLOW,allienYellow);
+        playerHashMap.put(TYPE_PLAYER_MOTO,motoPlayer);
+        playerHashMap.put(TYPE_PLAYER_VOITURE,voiturePlayer);
 
     }
 

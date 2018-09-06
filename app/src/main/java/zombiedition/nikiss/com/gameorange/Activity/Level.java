@@ -21,6 +21,8 @@ import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_MOTO;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_VOITURE;
 
 public class Level extends AppCompatActivity {
 
@@ -37,13 +39,15 @@ public class Level extends AppCompatActivity {
 
         rv = (RecyclerView)findViewById(R.id.recycleview_select_mission);
         serviceBDD = new ServiceBDD(this);
-
-        chargerDefaultMission();
+        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapter = new MissionAdapter(missionList);
+        rv.setAdapter(adapter);
 
         /**
          * vas charger les donnes depuis la base de donnnees du telephone
          */
-        chargerDebloqMission();
+        //chargerDefaultMission();
+        chargerLocalMission();
 
         rv.addOnItemTouchListener(new RecyclerTouchListener(this,
                 rv, new RecyclerTouchListener.ClickListener() {
@@ -58,6 +62,12 @@ public class Level extends AppCompatActivity {
                         break;
                     case 1:
                         SELECT_LEVEL_GAME=TYPE_PLAYER_ALIEN_YELLOW;
+                        break;
+                    case 2:
+                        SELECT_LEVEL_GAME=TYPE_PLAYER_MOTO;
+                        break;
+                    case 3:
+                        SELECT_LEVEL_GAME=TYPE_PLAYER_VOITURE;
                         break;
                     default:  SELECT_LEVEL_GAME=TYPE_PLAYER_ALIEN;
                 }
@@ -75,32 +85,34 @@ public class Level extends AppCompatActivity {
 
     }
 
-    private void chargerDefaultMission() {
 
-        missionList.add(new Mission(1,"ALLIEN",1,"La mission est de d'arrive au bouvevard avec les passagers "));
-        missionList.add(new Mission(2,"TAXIMAN",2,"la mission consiste a transporte des personnes à l'aeroport"));
-        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new MissionAdapter(missionList);
-        rv.setAdapter(adapter);
-    }
 
     /**
      * La methode devrai faire une requete pour avoir la liste des mission debloquer et les
      * charges dans la liste . la source peut etre SharedPredferences , LocalStorage
+     *
+     * la methode suivant permet de charger des missions depuis la base de donnees
+     * au cas ou ils n'ya pas de donnees dans la base ils insere deux missions par defaut dans la base
+     * et charge les deux missions. dans le cas contraire ils charge tous les jeux dans la base de donnes
      */
-    private void chargerDebloqMission() {
+    private void chargerLocalMission() {
 
         //On ouvre la base de données pour écrire dedans
         serviceBDD.open();
 
         if (serviceBDD.getAllMissions().size() == 0) {
-            //If not added then add the ques,options in table
-            serviceBDD.ajouterQuelquesMissions();
+            //au cas ou la base est vide
+            serviceBDD.ajouterDefaultMissions();
+            missionList.addAll(serviceBDD.getAllMissions());
+        }
+        else  {
+
+            missionList.addAll(serviceBDD.getAllMissions());
+
         }
 
-        missionList.addAll(serviceBDD.getAllMissions());
-
         serviceBDD.close();
+
     }
 
     //TODO:prevoir une methode pour telecharger des news Missions
@@ -121,7 +133,16 @@ public class Level extends AppCompatActivity {
         missionList.addAll(serviceBDD.getAllMissions());
         serviceBDD.close();
 
+    }
 
+
+    private void chargerDefaultMission() {
+
+        missionList.add(new Mission(1,"ALLIEN",1,"La mission est de d'arrive au bouvevard avec les passagers "));
+        missionList.add(new Mission(2,"TAXIMAN",2,"la mission consiste a transporte des personnes à l'aeroport"));
+        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapter = new MissionAdapter(missionList);
+        rv.setAdapter(adapter);
     }
 
 }

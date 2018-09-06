@@ -15,8 +15,9 @@ public class Constants {
 
     public static int TYPE_PLAYER_ALIEN = 0;
     public static int TYPE_PLAYER_ALIEN_YELLOW = 1;
-    public static int TYPE_PLAYER_VOITURE = 2;
-    public static int TYPE_PLAYER_MOTO = 3;
+    public static int TYPE_PLAYER_MOTO = 2;
+    public static int TYPE_PLAYER_VOITURE = 3;
+
 
     public static int SELECT_LEVEL_GAME ;
 
