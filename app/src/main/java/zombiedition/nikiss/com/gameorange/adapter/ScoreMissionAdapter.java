@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class ScoreMissionAdapter extends RecyclerView.Adapter<ScoreMissionAdapte
         public TextView level;
         public TextView description;
         public TextView meilleurScore;
+        public ImageView img;
 
         public MyViewHolder(View view) {
             super(view);
@@ -33,6 +35,7 @@ public class ScoreMissionAdapter extends RecyclerView.Adapter<ScoreMissionAdapte
             level = (TextView) view.findViewById(R.id.txtLevel);
             description = (TextView) view.findViewById(R.id.txtDescription);
             meilleurScore = (TextView) view.findViewById(R.id.txtMeilleurScore);
+            img = (ImageView) view.findViewById(R.id.imageView);
         }
     }
 
@@ -58,6 +61,25 @@ public class ScoreMissionAdapter extends RecyclerView.Adapter<ScoreMissionAdapte
         holder.description.setText(mission.getDescription());
         holder.meilleurScore.setText("Meilleur Score : "+mission.getMeilleurScore());
         holder.itemView.setTag(mission);
+
+        switch (mission.getLevel()) {
+            case 0:
+                holder.img.setImageResource(R.drawable.alienblue);
+                break;
+
+            case 1:
+                holder.img.setImageResource(R.drawable.alienyellow);
+                break;
+
+            case 2:
+                holder.img.setImageResource(R.drawable.moto_img);
+                break;
+
+            default:
+                holder.img.setImageResource(R.drawable.taxi_img);
+                break;
+        }
+
 
     }
 

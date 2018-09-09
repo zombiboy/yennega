@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import zombiedition.nikiss.com.gameorange.dto.Mission;
 import zombiedition.nikiss.com.gameorange.utils.Constants;
+import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
@@ -37,6 +39,7 @@ public class ObstacleManager {
     private Context context;
 
     private SharedPreferences sharedPreferences;
+    private ServiceBDD serviceBDD;
 
 
 
@@ -62,6 +65,7 @@ public class ObstacleManager {
         this.context = context;
 
         sharedPreferences = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE);
+        serviceBDD = new ServiceBDD(context);
 
         startTime = initTime = System.currentTimeMillis();
 
@@ -95,7 +99,10 @@ public class ObstacleManager {
      */
     private void MemoriserScoreJeux() {
 
+
+
         //initializing shared Preferences
+
 
         System.out.println("AN avant "+MEILLEUR_SCORE+"DU LEVEL"+SELECT_LEVEL_GAME);
 

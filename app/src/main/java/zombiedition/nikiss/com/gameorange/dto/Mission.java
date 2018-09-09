@@ -87,4 +87,17 @@ public class Mission {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Mission{" +
+                "id=" + id +
+                ", typePlayer=" + typePlayer +
+                ", nameMission='" + nameMission + '\'' +
+                ", level=" + level +
+                ", description='" + description + '\'' +
+                ", meilleurScore=" + meilleurScore +
+                ", scorePourDebloqSuivant=" + scorePourDebloqSuivant +
+                '}';
+    }
 }

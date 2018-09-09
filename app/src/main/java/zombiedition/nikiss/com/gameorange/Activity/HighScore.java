@@ -14,6 +14,7 @@ import java.util.List;
 import zombiedition.nikiss.com.gameorange.R;
 import zombiedition.nikiss.com.gameorange.adapter.ScoreMissionAdapter;
 import zombiedition.nikiss.com.gameorange.dto.Mission;
+import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_HIGHSCORE_LEVEL;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_LEVEL;
@@ -21,58 +22,52 @@ import static zombiedition.nikiss.com.gameorange.utils.Constants.SHAR_PREF_NAME;
 
 public class HighScore extends AppCompatActivity {
 
-    private TextView textView,textView2,textView3;
+    private TextView textView;
 
-    private SharedPreferences sharedPreferences;
 
     private RecyclerView rv;
     private List<Mission> missionList = new ArrayList<>();
     private ScoreMissionAdapter adapter;
+    private ServiceBDD serviceBDD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
 
-        textView = (TextView) findViewById(R.id.textView);
-        textView2 = (TextView) findViewById(R.id.textView2);
-        textView3 = (TextView) findViewById(R.id.textView3);
+
         rv = (RecyclerView) findViewById(R.id.recycleview_score);
+        serviceBDD = new ServiceBDD(this);
 
-        chargerDefaultScoreMission();
-
-        sharedPreferences  = getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE);
-
-        //TODO: Mettre un increment pour defiler les scores ,Afficher avec un Recycleview
-
-        int score;
-
-        score = sharedPreferences.getInt(PREFS_HIGHSCORE_LEVEL+"0",0);
-        textView.setText("Niveau "+"1 : "+"Score "+score);
-        textView2.setText("2."+"13");
-        textView3.setText("3."+"AZ");
-        //textView4.setText("4."+sharedPreferences.getInt("score4",0));
-
-    }
-
-    private void chargerDefaultScoreMission() {
-        //TODO:: Mettre a jour l'objet Mission avant de la mettre dans la Liste
-
-        Mission m =new Mission(1,"ALLIEN",1,"La mission est de d'arrive au bouvevard avec les passagers ",50);
-        m.setMeilleurScore(100);
-        missionList.add(m);
-        missionList.add(new Mission(2,"TAXIMAN",2,"la mission consiste a transporte des personnes à l'aeroport",100));
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapter = new ScoreMissionAdapter(missionList);
         rv.setAdapter(adapter);
 
-        chargerDebloqMission();
+        chargerScoreMission();
+
     }
 
     /**
      * La methode devrait permettre de charger les missions qui sont soit dans le sharedPrefern,Local
      */
-    private void chargerDebloqMission() {
+    private void chargerScoreMission() {
+
+        //On ouvre la base de données pour écrire dedans
+        serviceBDD.open();
+
+        if (serviceBDD.getAllMissions().size() == 0) {
+            //au cas ou la base est vide
+            serviceBDD.ajouterDefaultMissions();
+            missionList.addAll(serviceBDD.getAllMissions());
+        }
+        else  {
+
+            missionList.addAll(serviceBDD.getAllMissions());
+
+        }
+
+        serviceBDD.close();
+
 
     }
 }

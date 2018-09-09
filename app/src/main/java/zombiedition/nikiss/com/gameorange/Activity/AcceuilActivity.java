@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 
 import zombiedition.nikiss.com.gameorange.MainActivity;
 import zombiedition.nikiss.com.gameorange.R;
+import zombiedition.nikiss.com.gameorange.dto.Mission;
+import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 
 public class AcceuilActivity extends Activity implements View.OnClickListener{
 
@@ -18,6 +20,7 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
     private ImageButton buttonPlay;
     // the high score button
     private ImageButton buttonScore;
+    private ServiceBDD serviceBDD;
 
 
     @Override
@@ -41,6 +44,30 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
         //setting the on click listener to play now button
         buttonPlay.setOnClickListener(this);
 
+        serviceBDD = new ServiceBDD(this);
+
+
+
+
+    }
+
+    private void test() {
+        serviceBDD.openRead();
+
+        if (serviceBDD.getAllMissions().size() != 0) {
+            System.out.println("GET GET  GET");
+            //au cas ou la base est vide
+            Mission m=serviceBDD.getMission(2);
+            System.out.println(m.toString());
+            m.setDescription("OUI POUR LA DESC");
+            m.setNameMission("NEW");
+            int i = serviceBDD.updateMission(m);
+            Mission n=serviceBDD.getMission(2);
+            System.out.println(n.toString());
+        }
+
+
+        serviceBDD.close();
     }
 
     @Override
@@ -53,6 +80,7 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
             startActivity(new Intent(AcceuilActivity.this, Level.class));
         }
         if (v == buttonScore) {
+
             //the transition from MainActivity to HighScore activity
             startActivity(new Intent(AcceuilActivity.this, HighScore.class));
         }

@@ -136,13 +136,6 @@ public class Level extends AppCompatActivity {
     }
 
 
-    private void chargerDefaultMission() {
 
-        missionList.add(new Mission(1,"ALLIEN",1,"La mission est de d'arrive au bouvevard avec les passagers "));
-        missionList.add(new Mission(2,"TAXIMAN",2,"la mission consiste a transporte des personnes à l'aeroport"));
-        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new MissionAdapter(missionList);
-        rv.setAdapter(adapter);
-    }
 
 }
