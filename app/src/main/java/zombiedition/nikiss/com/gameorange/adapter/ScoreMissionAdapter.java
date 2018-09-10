@@ -63,16 +63,19 @@ public class ScoreMissionAdapter extends RecyclerView.Adapter<ScoreMissionAdapte
         holder.itemView.setTag(mission);
 
         switch (mission.getLevel()) {
-            case 0:
+            case 1:
                 holder.img.setImageResource(R.drawable.alienblue);
                 break;
 
-            case 1:
+            case 2:
                 holder.img.setImageResource(R.drawable.alienyellow);
                 break;
 
-            case 2:
+            case 3:
                 holder.img.setImageResource(R.drawable.moto_img);
+                break;
+            case 4:
+                holder.img.setImageResource(R.drawable.taxi_img);
                 break;
 
             default:

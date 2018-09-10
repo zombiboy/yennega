@@ -230,10 +230,10 @@ public class ServiceBDD {
     public void ajouterDefaultMissions() {
         ArrayList<Mission> missionList = new ArrayList<>();
 
-        missionList.add(new Mission(1,"ALLIEN",1,"La mission est de d'arrive au bouvevard avec les passagers",5));
-        missionList.add(new Mission(2,"ALLIEN 2",2,"la mission consiste a transporte des personnes à l'aeroport",10));
-        missionList.add(new Mission(3,"MOTO",3,"la mission velo drome seulement l'aeroport",20));
-        missionList.add(new Mission(4,"VOITUREX",4,"la mission consiste a  des personnes à l'aeroport",100));
+        missionList.add(new Mission(1,"ALLIEN",1,"La mission est de d'arrive au bouvevard avec les passagers",2));
+        //missionList.add(new Mission(2,"ALLIEN 2",2,"la mission consiste a transporte des personnes à l'aeroport",3));
+        //missionList.add(new Mission(3,"MOTO",3,"la mission velo drome seulement l'aeroport",5));
+        //missionList.add(new Mission(4,"VOITUREX",4,"la mission consiste a  des personnes à l'aeroport",8));
 
         this.addAllMissions(missionList);
 

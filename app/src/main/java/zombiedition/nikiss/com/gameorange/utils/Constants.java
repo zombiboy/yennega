@@ -13,10 +13,10 @@ public class Constants {
     public static Context CURRENT_CONTEXT;
     public static long   INIT_TIME;
 
-    public static int TYPE_PLAYER_ALIEN = 0;
-    public static int TYPE_PLAYER_ALIEN_YELLOW = 1;
-    public static int TYPE_PLAYER_MOTO = 2;
-    public static int TYPE_PLAYER_VOITURE = 3;
+    public static int TYPE_PLAYER_ALIEN = 1;
+    public static int TYPE_PLAYER_ALIEN_YELLOW = 2;
+    public static int TYPE_PLAYER_MOTO = 3;
+    public static int TYPE_PLAYER_VOITURE = 4;
 
 
     public static int SELECT_LEVEL_GAME =1;

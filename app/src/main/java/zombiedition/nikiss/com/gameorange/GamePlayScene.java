@@ -17,8 +17,11 @@ import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 
 import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_MOTO;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_VOITURE;
 
 
 /**
@@ -260,28 +263,34 @@ public class GamePlayScene extends Activity implements Scene {
     private void memoriserScoreJeux() {
 
 
-        serviceBDD.openRead();
+        serviceBDD.open();
 
         if (serviceBDD.getAllMissions().size() != 0) {
-
-            //TODO:: A changer
-            int level= 2;
 
             System.out.println("LEVEL ISSSSSSSSSS "+SELECT_LEVEL_GAME);
             Mission missionEnCours=serviceBDD.getMissionByLevel(SELECT_LEVEL_GAME);
             if (missionEnCours!=null)
             {
-                //Mission missionEnCours=serviceBDD.getMissionByLevel(SELECT_LEVEL_GAME);
                 //Mise a jour de la mission
                 int lastMeilleurScore = missionEnCours.getMeilleurScore();
 
-                System.out.println("MEUILLEUR SOCORE EST "+MEILLEUR_SCORE+" LEVEL IS"+SELECT_LEVEL_GAME);
+                System.out.println("MEUILLEUR SOCORE EST "+MEILLEUR_SCORE+" last score is"+lastMeilleurScore);
 
                 if(MEILLEUR_SCORE >lastMeilleurScore) {
 
                     missionEnCours.setMeilleurScore(MEILLEUR_SCORE);
-                    //int i = serviceBDD.updateMission(missionEnCours);
-                    //TODO:: SI ca vaut le score pour debloquer la mission suivant donc on debloq et notifie au joueur
+
+                    // a debloquer une seul fois dans le jeux
+                    if( MEILLEUR_SCORE > missionEnCours.getScorePourDebloqSuivant() && missionEnCours.getScorePourDebloqSuivant()>lastMeilleurScore ){
+
+                        //TODO:: SI ca vaut le score pour debloquer la mission suivant donc on debloq et notifie au joueur
+                        debloquerMissionSuivant();
+                        System.out.println("LE LEVEL SUIVANT DOIT ETRE DEBLOK");
+
+                    }
+
+                    int i = serviceBDD.updateMission(missionEnCours);
+
                 }
                 else {
                     Log.d(this.getClass().getSimpleName(),"MISE A JOUR REFUSE");
@@ -294,6 +303,27 @@ public class GamePlayScene extends Activity implements Scene {
 
         serviceBDD.close();
 
+    }
+
+    private void debloquerMissionSuivant() {
+
+        // si le score est superieur au score pour debloquer alors on debloq la mission
+        switch (SELECT_LEVEL_GAME) {
+            case 1:
+                //creer le level 2
+                Mission mission =new Mission(2,"ALLIEN 2",2,"la mission consiste a transporte des personnes à l'aeroport",3);
+                serviceBDD.insertMission(mission);
+
+                break;
+            case 2:
+                //creer le level 3
+                serviceBDD.insertMission((new Mission(3,"MOTO",3,"la mission velo drome seulement l'aeroport",5)));
+                break;
+            case 3:
+                serviceBDD.insertMission(new Mission(4,"VOITURE",4,"la mission consiste a  des personnes à l'aeroport",30));
+                break;
+            default:  ;
+        }
     }
 
 
