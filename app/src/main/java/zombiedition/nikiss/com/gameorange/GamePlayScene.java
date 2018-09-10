@@ -8,10 +8,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 
+import zombiedition.nikiss.com.gameorange.dto.Mission;
 import zombiedition.nikiss.com.gameorange.utils.Constants;
+import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 
+import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
@@ -55,6 +59,7 @@ public class GamePlayScene extends Activity implements Scene {
     private long frameTime;
     private Rect r = new Rect();
     private Context context;
+    private ServiceBDD serviceBDD;
 
     /**
      *  DEFISSONS ICI La taille du Joeur  et  ou Son TYPE
@@ -95,7 +100,7 @@ public class GamePlayScene extends Activity implements Scene {
          */
 
 
-
+        serviceBDD = new ServiceBDD(context);
         player = new RectPlayer(new Rect(100,100,200,200),SELECT_LEVEL_GAME);
         playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
@@ -232,6 +237,7 @@ public class GamePlayScene extends Activity implements Scene {
             if (obstacleManager.playerCollide(player)) {
                 gameOver = true;
                 gameOverTime= System.currentTimeMillis();
+                memoriserScoreJeux();
                 System.out.println("GAMEOVERTIME OUF:"+gameOverTime);
                 //ici qu'on vas essayer de sauvegarder le score
             }
@@ -251,6 +257,44 @@ public class GamePlayScene extends Activity implements Scene {
     }
 
 
+    private void memoriserScoreJeux() {
+
+
+        serviceBDD.openRead();
+
+        if (serviceBDD.getAllMissions().size() != 0) {
+
+            //TODO:: A changer
+            int level= 2;
+
+            System.out.println("LEVEL ISSSSSSSSSS "+SELECT_LEVEL_GAME);
+            Mission missionEnCours=serviceBDD.getMissionByLevel(SELECT_LEVEL_GAME);
+            if (missionEnCours!=null)
+            {
+                //Mission missionEnCours=serviceBDD.getMissionByLevel(SELECT_LEVEL_GAME);
+                //Mise a jour de la mission
+                int lastMeilleurScore = missionEnCours.getMeilleurScore();
+
+                System.out.println("MEUILLEUR SOCORE EST "+MEILLEUR_SCORE+" LEVEL IS"+SELECT_LEVEL_GAME);
+
+                if(MEILLEUR_SCORE >lastMeilleurScore) {
+
+                    missionEnCours.setMeilleurScore(MEILLEUR_SCORE);
+                    //int i = serviceBDD.updateMission(missionEnCours);
+                    //TODO:: SI ca vaut le score pour debloquer la mission suivant donc on debloq et notifie au joueur
+                }
+                else {
+                    Log.d(this.getClass().getSimpleName(),"MISE A JOUR REFUSE");
+                }
+            }
+
+
+        }
+
+
+        serviceBDD.close();
+
+    }
 
 
 }

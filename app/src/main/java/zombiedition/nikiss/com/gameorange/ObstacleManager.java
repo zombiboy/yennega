@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -85,7 +86,7 @@ public class ObstacleManager {
         for (Obstacle ob: obstacles ) {
             if (ob.playerCollide(player)){
 
-                MemoriserScoreJeux();
+                memoriserInfoScore();
                 gameOnsound.pause();
             return true;
             }
@@ -97,14 +98,21 @@ public class ObstacleManager {
      * Cette methode nous permettra de memoriser les meilleurs scores de chaque etapes
      * a la fi n du jeux, la VARAIBLE MEILLEUR_SCORE nous permettra de sauvegarder les scores
      */
-    private void MemoriserScoreJeux() {
+    private void memoriserInfoScore() {
+
+        //NOUS PERMET DE MEMORISER DES INFOS EN LOCAL
+        MEILLEUR_SCORE=score;
+
+    }
+
+    private void Memoriser() {
 
 
 
         //initializing shared Preferences
 
-
         System.out.println("AN avant "+MEILLEUR_SCORE+"DU LEVEL"+SELECT_LEVEL_GAME);
+
 
         MEILLEUR_SCORE+=score;
         System.out.println("NN avant "+MEILLEUR_SCORE);

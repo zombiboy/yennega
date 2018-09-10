@@ -240,4 +240,34 @@ public class ServiceBDD {
     }
 
 
+    public Mission getMissionByLevel(int selectLevelGame) {
+        bdd = maBaseSQLite.getWritableDatabase();
+
+        String coloumn[] = {COL_ID, COL_TYPE_PLAYER, COL_NAME_MISSION, COL_LEVEL_MISSION, COL_DESC_MISSION, COL_MEILLEUR_SCORE, COL_SCORE_POUR_DEBLOQ_SUIV};
+
+        Cursor cursor = bdd.query(
+                TABLE_MISSIONS,
+                coloumn,
+                COL_LEVEL_MISSION + "=?",
+                new String[]{String.valueOf(selectLevelGame)},
+                null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        // prepare note object
+        Mission mission = new Mission();
+        mission.setId(cursor.getInt(NUM_COL_ID));
+        mission.setTypePlayer(cursor.getInt(NUM_COL_TYPE_PLAYER));
+        mission.setNameMission(cursor.getString(NUM_COL_NAME_MISSION));
+        mission.setLevel(cursor.getInt(NUM_COL_LEVEL_MISSION));
+        mission.setDescription(cursor.getString(NUM_COL_DESC_MISSION));
+        mission.setMeilleurScore(cursor.getInt(NUM_COL_MEILLEUR_SCORE));
+        mission.setScorePourDebloqSuivant(cursor.getInt(NUM_COL_SCORE_POUR_DEBLOQ_SUIV));
+
+        // close the db connection
+        cursor.close();
+
+        return mission;
+    }
 }

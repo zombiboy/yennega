@@ -19,7 +19,7 @@ public class Constants {
     public static int TYPE_PLAYER_VOITURE = 3;
 
 
-    public static int SELECT_LEVEL_GAME ;
+    public static int SELECT_LEVEL_GAME =1;
 
     public static int  MEILLEUR_SCORE = 0;
 

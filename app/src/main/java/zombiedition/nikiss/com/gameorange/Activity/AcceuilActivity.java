@@ -57,13 +57,8 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
         if (serviceBDD.getAllMissions().size() != 0) {
             System.out.println("GET GET  GET");
             //au cas ou la base est vide
-            Mission m=serviceBDD.getMission(2);
+            Mission m=serviceBDD.getMissionByLevel(3);
             System.out.println(m.toString());
-            m.setDescription("OUI POUR LA DESC");
-            m.setNameMission("NEW");
-            int i = serviceBDD.updateMission(m);
-            Mission n=serviceBDD.getMission(2);
-            System.out.println(n.toString());
         }
 
 
@@ -84,7 +79,6 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
             //the transition from MainActivity to HighScore activity
             startActivity(new Intent(AcceuilActivity.this, HighScore.class));
         }
-
 
 
     }
