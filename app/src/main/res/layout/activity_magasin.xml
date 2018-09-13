@@ -6,4 +6,5 @@
     android:layout_height="match_parent"
     tools:context="zombiedition.nikiss.com.gameorange.Activity.MagasinActivity">
 
+
 </android.support.constraint.ConstraintLayout>

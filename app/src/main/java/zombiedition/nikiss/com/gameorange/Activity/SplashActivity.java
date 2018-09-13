@@ -57,11 +57,11 @@ public class SplashActivity extends Activity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(SplashActivity.this,AcceuilActivity.class);
+                Intent intent=new Intent(SplashActivity.this,SplashLoadActivity.class);
                 startActivity(intent);
                 finish();
             }
-        },6000);
+        },5000);
 
     }
 }
