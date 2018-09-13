@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="progressbar_colors">
+        <item>#fbbc05</item>
+        <item>#34a853</item>
+        <item>#ea4235</item>
+        <item>#4284f4</item>
+    </array>
+</resources>

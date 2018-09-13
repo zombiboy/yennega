@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoBar">
         <activity
+            android:name=".Activity.SplashLoadActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_index"
+            android:theme="@style/FullscreenTheme" />
+        <activity
             android:name=".Activity.AcceuilActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -27,7 +32,12 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.HighScore" />
-        <activity android:name=".Activity.Level"></activity>
+        <activity android:name=".Activity.Level" />
+        <activity
+            android:name=".Activity.SplashActivity"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".Activity.MagasinActivity" />
+        <activity android:name=".Activity.OptionsActivity"></activity>
     </application>
 
 </manifest>

@@ -20,6 +20,8 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
     private ImageButton buttonPlay;
     // the high score button
     private ImageButton buttonScore;
+    private ImageButton buttonMagasin;
+    private ImageButton buttonOptions;
     private ServiceBDD serviceBDD;
 
 
@@ -38,11 +40,15 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
 
         //initializing the highscore button
         buttonScore = (ImageButton) findViewById(R.id.buttonScore);
+        buttonMagasin = (ImageButton) findViewById(R.id.buttonMagasin);
+        buttonOptions = (ImageButton) findViewById(R.id.buttonOptions);
 
         //setting the on click listener to high score button
         buttonScore.setOnClickListener(this);
         //setting the on click listener to play now button
         buttonPlay.setOnClickListener(this);
+        buttonMagasin.setOnClickListener(this);
+        buttonOptions.setOnClickListener(this);
 
         serviceBDD = new ServiceBDD(this);
 
@@ -78,6 +84,18 @@ public class AcceuilActivity extends Activity implements View.OnClickListener{
 
             //the transition from MainActivity to HighScore activity
             startActivity(new Intent(AcceuilActivity.this, HighScore.class));
+        }
+
+        if (v == buttonMagasin) {
+
+            //the transition from MainActivity to HighScore activity
+            startActivity(new Intent(AcceuilActivity.this, MagasinActivity.class));
+        }
+
+        if (v == buttonOptions) {
+
+            //the transition from MainActivity to HighScore activity
+            startActivity(new Intent(AcceuilActivity.this, OptionsActivity.class));
         }
 
 
