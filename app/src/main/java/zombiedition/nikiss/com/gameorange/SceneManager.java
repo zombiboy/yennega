@@ -18,11 +18,6 @@ public class SceneManager {
     private ArrayList <Scene> scenes= new ArrayList<>();
     public static int ACTIVE_SCENE;
 
-    public SceneManager() {
-        ACTIVE_SCENE =0;
-        scenes.add(new GamePlayScene());
-
-    }
 
     public SceneManager(Context context) {
         ACTIVE_SCENE =0;

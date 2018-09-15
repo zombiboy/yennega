@@ -32,6 +32,7 @@ public class ObstacleManager {
     private int obstacleGap;
     private int obstacleHeight;
     private int color;
+    private Boom boom;
     private int score=0;
 
     private long startTime;
@@ -42,21 +43,6 @@ public class ObstacleManager {
     private SharedPreferences sharedPreferences;
     private ServiceBDD serviceBDD;
 
-
-
-    public ObstacleManager(int playerGap, int obstacleGap, int obstacleHeight, int color) {
-        this.playerGap = playerGap;
-        this.obstacleGap = obstacleGap;
-        this.obstacleHeight = obstacleHeight;
-        this.color = color;
-
-        startTime = initTime = System.currentTimeMillis();
-
-        obstacles = new ArrayList<>();
-
-        // si pause est faux alors on populate le jeux
-        populateObstacles();
-    }
 
     public ObstacleManager(int playerGap, int obstacleGap, int obstacleHeight, int color,Context context) {
         this.playerGap = playerGap;
@@ -71,6 +57,10 @@ public class ObstacleManager {
         startTime = initTime = System.currentTimeMillis();
 
         obstacles = new ArrayList<>();
+        boom = new  Boom(context);
+        //Permet de mettre l'image du boom hors de l'ecran lors de l'initialisation du BOOM
+        boom.setX(-350);
+        boom.setY(-350);
 
         // si pause est faux alors on populate le jeux
         populateObstacles();
@@ -85,13 +75,18 @@ public class ObstacleManager {
     public boolean playerCollide(RectPlayer player) {
         for (Obstacle ob: obstacles ) {
             if (ob.playerCollide(player)){
-
+                dessinerBoom(player);
                 memoriserInfoScore();
                 gameOnsound.pause();
             return true;
             }
         }
         return false;
+    }
+
+    private void dessinerBoom(RectPlayer player) {
+        boom.setX(player.getRectangle().centerX()-100);
+        boom.setY(player.getRectangle().centerY()-100);
     }
 
     /**
@@ -202,5 +197,14 @@ public class ObstacleManager {
         paint.setTextSize(100);
         paint.setColor(Color.MAGENTA);
         canvas.drawText(""+score,50,50+paint.descent()-paint.ascent(),paint);
+        //draw le boom
+
+        canvas.drawBitmap(
+                boom.getBitmap(),
+                boom.getX(),
+                boom.getY(),
+                paint
+        );
+        //End drawing boom image
     }
 }

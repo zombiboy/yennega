@@ -69,27 +69,6 @@ public class GamePlayScene extends Activity implements Scene {
      *  player = new RectPlayer(new Rect(100,100,200,200));
      *  RectPlayer(new Rect(100,100,200,200),TYPE_PLAYER_ALIEN_YELLOW);
      */
-    public GamePlayScene(){
-
-        /**
-         * definission de la taille du joueur
-         * TYPE_PLAYER_ALIEN_YELLOW
-         * SELECT_LEVEL_GAME =TYPE_PLAYER_ALIEN  = 0 = position
-         * SELECT_LEVEL_GAME =TYPE_PLAYER_ALIEN_YELLOW;
-         */
-
-
-
-        player = new RectPlayer(new Rect(100,100,200,200),SELECT_LEVEL_GAME);
-        playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
-        player.update(playerPoint);
-
-        obstacleManager = new ObstacleManager(400,650,75,Color.BLACK);
-
-        orientationData=new OrientationData();
-        orientationData.register();
-        frameTime= System.currentTimeMillis();
-    }
 
     public GamePlayScene(Context context){
 
@@ -129,7 +108,6 @@ public class GamePlayScene extends Activity implements Scene {
         gameOnsound.start();
 
         System.out.println("RESET DAN GAMEPLAY");
-
 
     }
 
