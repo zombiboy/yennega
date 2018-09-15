@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class ObstacleManager {
     private long initTime;
 
     private Context context;
+    static MediaPlayer gameOversound;
 
     private SharedPreferences sharedPreferences;
     private ServiceBDD serviceBDD;
@@ -61,6 +63,7 @@ public class ObstacleManager {
         //Permet de mettre l'image du boom hors de l'ecran lors de l'initialisation du BOOM
         boom.setX(-350);
         boom.setY(-350);
+        gameOversound = MediaPlayer.create(context,R.raw.gameover);
 
         // si pause est faux alors on populate le jeux
         populateObstacles();
@@ -78,6 +81,7 @@ public class ObstacleManager {
                 dessinerBoom(player);
                 memoriserInfoScore();
                 gameOnsound.pause();
+                gameOversound.start();
             return true;
             }
         }
