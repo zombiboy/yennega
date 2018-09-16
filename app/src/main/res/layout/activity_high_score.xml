@@ -5,31 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:paddingTop="50dp"
+    android:paddingTop="20dp"
     android:orientation="vertical"
     tools:context="zombiedition.nikiss.com.gameorange.Activity.HighScore"
     android:background="@drawable/splash"
     >
 
 
-
-    <TextView
-
-        android:text="Meilleurs Scores"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
+    <ImageButton
+        android:id="@+id/buttonPlay"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="30dp" />
-
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/scores" />
 
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview_score"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_height="match_parent" />
 
 

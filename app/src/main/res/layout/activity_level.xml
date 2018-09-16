@@ -8,19 +8,21 @@
     android:orientation="vertical"
     tools:context="zombiedition.nikiss.com.gameorange.Activity.Level">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Missions debloquées"
-        android:textColor="@android:color/white"
-        android:textSize="26sp"
-        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/mission_debloquer" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview_select_mission"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="62dp"

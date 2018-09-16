@@ -13,6 +13,8 @@ import android.view.WindowManager;
 import zombiedition.nikiss.com.gameorange.Activity.AcceuilActivity;
 import zombiedition.nikiss.com.gameorange.utils.Constants;
 
+import static zombiedition.nikiss.com.gameorange.utils.Constants.PARAM_SOUND_ON;
+
 
 public class MainActivity extends Activity {
 
@@ -40,7 +42,12 @@ public class MainActivity extends Activity {
 
         //initializing the media players for the game sounds
         gameOnsound = MediaPlayer.create(this,R.raw.audio);
-        gameOnsound.start();
+
+        if(PARAM_SOUND_ON) {
+            gameOnsound.start();
+            System.out.println("RENTRERTERTETRE");
+        }
+
         //setContentView(R.layout.activity_main);
         gamePanel =new GamePanel(this);
         setContentView(gamePanel);
@@ -62,7 +69,10 @@ public class MainActivity extends Activity {
 
 
                         //GameView.stopMusic();
-                        gameOnsound.stop();
+
+                        if(PARAM_SOUND_ON) {
+                            gameOnsound.stop();
+                        }
                         startActivity(new Intent(MainActivity.this, AcceuilActivity.class));
                         finish();
                     }

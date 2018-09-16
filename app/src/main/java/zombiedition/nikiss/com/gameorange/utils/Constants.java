@@ -18,6 +18,8 @@ public class Constants {
     public static int TYPE_PLAYER_MOTO = 3;
     public static int TYPE_PLAYER_VOITURE = 4;
 
+    public static boolean PARAM_SOUND_ON= true;
+
 
     public static int SELECT_LEVEL_GAME =1;
 

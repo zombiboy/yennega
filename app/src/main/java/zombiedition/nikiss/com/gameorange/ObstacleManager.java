@@ -17,6 +17,7 @@ import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.PARAM_SOUND_ON;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_HIGHSCORE_LEVEL;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_LEVEL;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
@@ -80,8 +81,12 @@ public class ObstacleManager {
             if (ob.playerCollide(player)){
                 dessinerBoom(player);
                 memoriserInfoScore();
-                gameOnsound.pause();
-                gameOversound.start();
+
+                if(PARAM_SOUND_ON) {
+                    gameOnsound.pause();
+                    gameOversound.start();
+                }
+
             return true;
             }
         }

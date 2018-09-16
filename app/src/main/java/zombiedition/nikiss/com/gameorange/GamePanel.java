@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 import zombiedition.nikiss.com.gameorange.utils.Constants;
 
 import static zombiedition.nikiss.com.gameorange.MainActivity.gameOnsound;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.PARAM_SOUND_ON;
 //import android.support.annotation.MainThread;
 
 /**
@@ -100,15 +101,21 @@ class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        gameOnsound.pause();
+
+        if(PARAM_SOUND_ON) {
+            gameOnsound.pause();
+        }
 
     }
 
 
 
     public void playGame() {
-        gameOnsound.start();
-        System.out.println("dans la Methode Play");
+
+
+        if(PARAM_SOUND_ON) {
+            gameOnsound.start();
+        }
 
         //relanceThread();
 

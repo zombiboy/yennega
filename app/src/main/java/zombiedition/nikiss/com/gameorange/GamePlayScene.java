@@ -16,6 +16,7 @@ import zombiedition.nikiss.com.gameorange.utils.Constants;
 import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 
 import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.PARAM_SOUND_ON;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
@@ -105,7 +106,10 @@ public class GamePlayScene extends Activity implements Scene {
         player.update(playerPoint);
         obstacleManager = new ObstacleManager(400,650,75,Color.BLACK,context);
         movingPlayer = false;
-        gameOnsound.start();
+
+        if(PARAM_SOUND_ON) {
+            gameOnsound.start();
+        }
 
         System.out.println("RESET DAN GAMEPLAY");
 
