@@ -46,7 +46,6 @@ public class Level extends AppCompatActivity {
         /**
          * vas charger les donnes depuis la base de donnnees du telephone
          */
-        //chargerDefaultMission();
         chargerLocalMission();
 
         rv.addOnItemTouchListener(new RecyclerTouchListener(this,

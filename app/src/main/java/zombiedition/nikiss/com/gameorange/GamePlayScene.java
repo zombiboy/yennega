@@ -17,6 +17,7 @@ import zombiedition.nikiss.com.gameorange.utils.ServiceBDD;
 
 import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PARAM_SOUND_ON;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.SCREEN_WIDTH;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
@@ -85,10 +86,11 @@ public class GamePlayScene extends Activity implements Scene {
 
         serviceBDD = new ServiceBDD(context);
         player = new RectPlayer(new Rect(100,100,200,200),SELECT_LEVEL_GAME);
-        playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
+        playerPoint = new Point(SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
 
-        obstacleManager = new ObstacleManager(400,650,75,Color.BLACK,context);
+        //obstacle gap 650
+        obstacleManager = new ObstacleManager(SCREEN_WIDTH/4,Constants.SCREEN_HEIGHT/2,75,Color.BLACK,context);
 
         orientationData=new OrientationData();
         orientationData.register();
@@ -102,16 +104,15 @@ public class GamePlayScene extends Activity implements Scene {
 
     public void reset() {
 
-        playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
+        playerPoint = new Point(SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
-        obstacleManager = new ObstacleManager(400,650,75,Color.BLACK,context);
+        obstacleManager = new ObstacleManager(SCREEN_WIDTH/4,Constants.SCREEN_HEIGHT/2,75,Color.BLACK,context);
         movingPlayer = false;
 
         if(PARAM_SOUND_ON) {
             gameOnsound.start();
         }
 
-        System.out.println("RESET DAN GAMEPLAY");
 
     }
 
@@ -179,11 +180,13 @@ public class GamePlayScene extends Activity implements Scene {
 
         if (gameOver){
             Paint paint = new Paint();
-            paint.setTextSize(100);
-            paint.setColor(Color.MAGENTA);
+
+            paint.setTextSize(SCREEN_WIDTH/10);
+            paint.setColor(Color.RED);
             drawCenterText(canvas,paint,"Fin de Partie");
 
         }
+
     }
 
     @Override
@@ -198,7 +201,7 @@ public class GamePlayScene extends Activity implements Scene {
                 float pitch = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];
                 float roll = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];
 
-                float xSpeed = 2* roll * Constants.SCREEN_WIDTH/1000f;
+                float xSpeed = 2* roll * SCREEN_WIDTH/1000f;
                 float ySpeed = pitch * Constants.SCREEN_HEIGHT/1000f;
 
                 playerPoint.x += Math.abs(xSpeed*elapsedTime) > 5 ? xSpeed * elapsedTime:0;
@@ -208,8 +211,8 @@ public class GamePlayScene extends Activity implements Scene {
 
             if (playerPoint.x < 0)
                 playerPoint.x = 0;
-            else if (playerPoint.x >Constants.SCREEN_WIDTH)
-                playerPoint.x = Constants.SCREEN_WIDTH;
+            else if (playerPoint.x > SCREEN_WIDTH)
+                playerPoint.x = SCREEN_WIDTH;
             if (playerPoint.y < 0)
                 playerPoint.y = 0;
             else if (playerPoint.y >Constants.SCREEN_HEIGHT)
@@ -223,7 +226,6 @@ public class GamePlayScene extends Activity implements Scene {
                 gameOver = true;
                 gameOverTime= System.currentTimeMillis();
                 memoriserScoreJeux();
-                System.out.println("GAMEOVERTIME OUF:"+gameOverTime);
                 //ici qu'on vas essayer de sauvegarder le score
             }
         }
@@ -295,7 +297,6 @@ public class GamePlayScene extends Activity implements Scene {
                 //creer le level 2
                 Mission mission =new Mission(2,"ALLIEN 2",2,"la mission consiste a transporte des personnes à l'aeroport",3);
                 serviceBDD.insertMission(mission);
-
                 break;
             case 2:
                 //creer le level 3

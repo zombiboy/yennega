@@ -20,6 +20,7 @@ import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PARAM_SOUND_ON;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_HIGHSCORE_LEVEL;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_LEVEL;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.SCREEN_WIDTH;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SHAR_PREF_NAME;
 
@@ -159,7 +160,7 @@ public class ObstacleManager {
     private void populateObstacles() {
         int currY = -5* Constants.SCREEN_HEIGHT/4;
         while(currY < 0) {
-            int xStart = (int)(Math.random()*(Constants.SCREEN_WIDTH - playerGap));
+            int xStart = (int)(Math.random()*(SCREEN_WIDTH - playerGap));
             obstacles.add(new Obstacle(obstacleHeight, color, xStart, currY, playerGap));
             currY += obstacleHeight + obstacleGap;
         }
@@ -184,7 +185,7 @@ public class ObstacleManager {
             ob.incrementY(speed * elapsedTime);
         }
         if(obstacles.get(obstacles.size() - 1).getRectangle().top >= Constants.SCREEN_HEIGHT) {
-            int xStart = (int)(Math.random()*(Constants.SCREEN_WIDTH - playerGap));
+            int xStart = (int)(Math.random()*(SCREEN_WIDTH - playerGap));
             obstacles.add(0, new Obstacle(obstacleHeight, color, xStart, obstacles.get(0).getRectangle().top - obstacleHeight - obstacleGap, playerGap));
             obstacles.remove(obstacles.size() - 1);
             score++;
@@ -203,11 +204,11 @@ public class ObstacleManager {
             ob.draw(canvas);
 
         Paint paint = new Paint();
-        paint.setTextSize(100);
-        paint.setColor(Color.MAGENTA);
+        paint.setTextSize(SCREEN_WIDTH/10);
+        paint.setColor(Color.RED);
         canvas.drawText(""+score,50,50+paint.descent()-paint.ascent(),paint);
-        //draw le boom
 
+        //draw le boom
         canvas.drawBitmap(
                 boom.getBitmap(),
                 boom.getX(),

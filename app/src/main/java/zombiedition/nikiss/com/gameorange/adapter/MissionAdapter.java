@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MyViewHo
         public TextView nameMission;
         public TextView level;
         public TextView description;
+        public ImageView img;
 
         public MyViewHolder(View view) {
             super(view);
@@ -31,6 +33,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MyViewHo
             nameMission = (TextView) view.findViewById(R.id.txtNameMission);
             level = (TextView) view.findViewById(R.id.txtLevel);
             description = (TextView) view.findViewById(R.id.txtDescription);
+            img = (ImageView) view.findViewById(R.id.imageView);
         }
     }
 
@@ -55,6 +58,27 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MyViewHo
         holder.level.setText("Mission "+mission.getLevel());
         holder.description.setText(mission.getDescription());
         holder.itemView.setTag(mission);
+
+        switch (mission.getLevel()) {
+            case 1:
+                holder.img.setBackgroundResource(R.drawable.alienblue);
+                break;
+
+            case 2:
+                holder.img.setBackgroundResource(R.drawable.alienyellow);
+                break;
+
+            case 3:
+                holder.img.setBackgroundResource(R.drawable.moto_img);
+                break;
+            case 4:
+                holder.img.setBackgroundResource(R.drawable.taxi_img);
+                break;
+
+            default:
+                holder.img.setImageResource(R.drawable.if_car_yellow);
+                break;
+        }
 
     }
 
