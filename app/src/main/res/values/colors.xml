@@ -6,5 +6,5 @@
     <color name="colorBlanc">#FFFFFF</color>
     <color name="primary_dark">#fbc02d</color>
     <color name="white">#FFFF</color>
-    <color name="splashBackground">#a9ffcf</color>
+    <color name="splashBackground">#FFF</color>
 </resources>

@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/splashBackground">
+    android:background="@color/colorBlanc">
 
     <ImageView
-        android:layout_margin="15dp"
+
         android:id="@+id/logo_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
