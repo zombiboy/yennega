@@ -11,7 +11,7 @@ public class Mission {
     private int level=0;
     private String description="";
     private int meilleurScore=0;
-    private int scorePourDebloqSuivant=0;
+    private int scorePourDebloqSuivant=10;
 
     public Mission() {
 

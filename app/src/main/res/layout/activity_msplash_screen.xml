@@ -1,6 +1,6 @@
 <!--
   ~
-  ~  C
+  ~  C NIKISS EDITION
   ~  The above copyright notice and this permission notice shall be included in
   ~  all copies or substantial portions of the software.
   -->
@@ -9,7 +9,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_background"
+    android:background="@drawable/logo_yapalee_load"
     tools:context="zombiedition.nikiss.com.gameorange.Activity.SplashLoadActivity">
 
     <TextView

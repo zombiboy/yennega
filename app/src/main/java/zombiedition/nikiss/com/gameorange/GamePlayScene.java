@@ -156,7 +156,7 @@ public class GamePlayScene extends Activity implements Scene {
                 {
                     if(duration<= MAX_DURATION)
                     {
-                        System.out.println("DOUBLE TAP");
+                        //System.out.println("DOUBLE TAP");
 
                     }
                     clickCount = 0;
@@ -251,14 +251,12 @@ public class GamePlayScene extends Activity implements Scene {
 
         if (serviceBDD.getAllMissions().size() != 0) {
 
-            System.out.println("LEVEL ISSSSSSSSSS "+SELECT_LEVEL_GAME);
+
             Mission missionEnCours=serviceBDD.getMissionByLevel(SELECT_LEVEL_GAME);
             if (missionEnCours!=null)
             {
                 //Mise a jour de la mission
                 int lastMeilleurScore = missionEnCours.getMeilleurScore();
-
-                System.out.println("MEUILLEUR SOCORE EST "+MEILLEUR_SCORE+" last score is"+lastMeilleurScore);
 
                 if(MEILLEUR_SCORE >lastMeilleurScore) {
 
@@ -269,7 +267,6 @@ public class GamePlayScene extends Activity implements Scene {
 
                         //TODO:: SI ca vaut le score pour debloquer la mission suivant donc on debloq et notifie au joueur
                         debloquerMissionSuivant();
-                        System.out.println("LE LEVEL SUIVANT DOIT ETRE DEBLOK");
 
                     }
 

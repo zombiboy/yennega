@@ -20,6 +20,7 @@ import static zombiedition.nikiss.com.gameorange.utils.Constants.MEILLEUR_SCORE;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PARAM_SOUND_ON;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_HIGHSCORE_LEVEL;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.PREFS_LEVEL;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.SCORE_TO_NEXT_MISSION;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SCREEN_WIDTH;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SELECT_LEVEL_GAME;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.SHAR_PREF_NAME;
@@ -37,6 +38,7 @@ public class ObstacleManager {
     private int color;
     private Boom boom;
     private int score=0;
+    private Boolean niveauSuivantDeblok=false;
 
     private long startTime;
     private long initTime;
@@ -114,14 +116,6 @@ public class ObstacleManager {
 
 
 
-        //initializing shared Preferences
-
-        System.out.println("AN avant "+MEILLEUR_SCORE+"DU LEVEL"+SELECT_LEVEL_GAME);
-
-
-        MEILLEUR_SCORE+=score;
-        System.out.println("NN avant "+MEILLEUR_SCORE);
-
         // PREFS_LEVEL+SELECT_LEVEL_GAME donne PREFS_LEVEL0 ,PREFS_LEVEL1
         //pour cela, on commence par regarder si on a déjà des éléments sauvegardés
         if (sharedPreferences.contains(PREFS_LEVEL+SELECT_LEVEL_GAME) && sharedPreferences.contains(PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME)) {
@@ -132,8 +126,7 @@ public class ObstacleManager {
             // Si le nouveau score est superieur a l'ancien alors on sauvegarde le nouveau Level
 
             if(score > lastscoreLevelEnCours ){
-                System.out.println("MISE A JOUR DU SCORE");
-                System.out.println("NOUVEL SCORE  == "+PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME+" "+score);
+
                 sharedPreferences
                         .edit()
                         .putInt(PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME, score)
@@ -142,7 +135,6 @@ public class ObstacleManager {
                 //TODO:: On pourra comparer le Score et debloquer le nouveau Niveau si possible
 
             }
-            System.out.println("ANCIEN SCORE  == "+PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME+" "+lastscoreLevelEnCours);
 
 
         } else {
@@ -152,7 +144,6 @@ public class ObstacleManager {
                     .putInt(PREFS_LEVEL+SELECT_LEVEL_GAME, SELECT_LEVEL_GAME)
                     .putInt(PREFS_HIGHSCORE_LEVEL+SELECT_LEVEL_GAME, score)
                     .apply();
-            System.out.println("SCORE SAUVEGARDER AVEC SUCCES");
         }
 
     }
@@ -190,6 +181,16 @@ public class ObstacleManager {
             obstacles.remove(obstacles.size() - 1);
             score++;
 
+            /**
+             * SCORE_TO_NEXT_MISSION est initialiser dans la selection du jeux
+             *  niveauSuivantDeblok a 2 permettra de faire le dessin a l'ecran
+             */
+
+            if(score==SCORE_TO_NEXT_MISSION){
+                niveauSuivantDeblok=true;
+            }else {
+                niveauSuivantDeblok=false;
+            }
 
         }
     }
@@ -216,5 +217,11 @@ public class ObstacleManager {
                 paint
         );
         //End drawing boom image
+        //Draw Text
+        if(niveauSuivantDeblok)
+        {
+            canvas.drawText("Niveau Deblok",SCREEN_WIDTH/2-50,80+paint.descent()-paint.ascent(),paint);
+        }
+
     }
 }

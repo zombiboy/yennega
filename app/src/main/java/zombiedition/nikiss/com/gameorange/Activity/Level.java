@@ -23,6 +23,7 @@ import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALI
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_ALIEN_YELLOW;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_MOTO;
 import static zombiedition.nikiss.com.gameorange.utils.Constants.TYPE_PLAYER_VOITURE;
+import static zombiedition.nikiss.com.gameorange.utils.Constants.SCORE_TO_NEXT_MISSION;
 
 public class Level extends AppCompatActivity {
 
@@ -53,6 +54,8 @@ public class Level extends AppCompatActivity {
             @Override
             public void onClick(View view, final int position) {
 
+                SCORE_TO_NEXT_MISSION = missionList.get(position).getScorePourDebloqSuivant();
+                //TODO:: initialise SELECT_LEVEL_GAME,TYPE_PLAYER_ALIEN a partir de l'objet de la base
 
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 switch (position) {

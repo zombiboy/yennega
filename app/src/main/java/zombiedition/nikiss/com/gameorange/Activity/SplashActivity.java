@@ -46,7 +46,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 System.out.println("Lancer et attendint 1 second");
-                logo.setImageResource(R.drawable.splash_img2);
+                logo.setImageResource(R.drawable.logo_nikiss_edition);
 
             }
         },1000);
@@ -56,7 +56,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 System.out.println("Lancer et attendint 1 second");
-                logo.setImageResource(R.drawable.splash_img1);
+                logo.setImageResource(R.drawable.logo_orange);
 
             }
         },3000);

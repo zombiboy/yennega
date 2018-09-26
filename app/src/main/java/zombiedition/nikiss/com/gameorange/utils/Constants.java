@@ -25,6 +25,8 @@ public class Constants {
 
     public static int  MEILLEUR_SCORE = 0;
 
+    public static int  SCORE_TO_NEXT_MISSION = 3;
+
     public static final String SHAR_PREF_NAME = "PREFSORANGE";
 
     public static final String PREFS_LEVEL="PREFS_LEVEL";
